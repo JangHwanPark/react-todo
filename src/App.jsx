@@ -1,30 +1,34 @@
 import './App.css';
 import {IoAddSharp} from "react-icons/io5";
-import {MdDeleteOutline} from "react-icons/md";
+import {useState} from "react";
 
 function App() {
+    const [input, setInput] = useState('');
+    const [todoMenu, setTodoMenu] = useState([]);
+
+    const handleInput = (e) => {
+        setInput(e.target.value);
+    }
+
+    const handleCreateList = () => {
+        const newMenu = {
+            name: input, state: false
+        }
+        setTodoMenu([...todoMenu, newMenu]);
+        setInput('');
+    }
+
     return (
         <div className="container">
             {/* 필터 */}
-            <div>
-                <ul>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                </ul>
-            </div>
+
             {/* 메뉴 추가 */}
-            <div>
-                <input type="text"/>
-                <button><IoAddSharp /></button>
+            <div className="todoMenu">
+                <input type="text" value={input} onChange={handleInput}/>
+                <button onClick={handleCreateList}><IoAddSharp /></button>
             </div>
             {/* 리스트 */}
-            <div>
-                <input type="checkbox"/>
-                <label htmlFor="">test</label>
-                <button><MdDeleteOutline /></button>
-            </div>
+            <p></p>
         </div>
     );
 }
