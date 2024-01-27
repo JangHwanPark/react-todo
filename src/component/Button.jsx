@@ -1,9 +1,7 @@
 import React from 'react';
 
-function Button(props) {
-    return (
-        <div></div>
-    );
+function Button({onClick, text}) {
+    return <button onClick={onClick}>{text}</button>
 }
 
 export default Button;

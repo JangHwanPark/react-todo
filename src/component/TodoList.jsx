@@ -1,12 +1,14 @@
 import React from 'react';
 import {MdDeleteOutline} from "react-icons/md";
+import Button from "./Button";
 
-function TodoList(props) {
+function TodoList({idx, item}) {
     return (
-        <div className="todoList">
-            <input type="checkbox"/>
-            <label htmlFor="">test</label>
-            <button><MdDeleteOutline /></button>
+        <div key={idx} className="todoList">
+            <input id={item.name} type="checkbox"/>
+            <label htmlFor={item.name}>{item.name}</label>
+            <Button text={<MdDeleteOutline />}/>
+            <button></button>
         </div>
     );
 }
