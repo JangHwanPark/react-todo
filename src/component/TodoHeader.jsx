@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {MdOutlineLightMode, MdOutlineNightlight} from "react-icons/md";
 
-export default function TodoHeade({filters, filter, onFilterChange}) {
+export default function TodoHeader({filters, filter, onFilterChange}) {
     return (
         <header className='filter'>
             <div><MdOutlineLightMode/></div>
@@ -9,7 +9,9 @@ export default function TodoHeade({filters, filter, onFilterChange}) {
             <ul>
                 {filters.map((value, idx) => (
                     <li key={idx}>
-                        <button onClick={() => onFilterChange(value)}>{value}</button>
+                        <button onClick={() => onFilterChange(value)}>
+                            {value}
+                        </button>
                     </li>
                 ))}
             </ul>
