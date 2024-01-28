@@ -9,7 +9,7 @@ const filters = ['전체', '계획된 일정', '완료됨'];
 function App() {
     /* 기본 카테고리 상태 관리 */
     const [filter, setFilter] = useState(filters[0]);
-
+    console.log(filter)
     return (
         <DarkModeProvider>
             <div className="container">
@@ -19,7 +19,7 @@ function App() {
                     filter={filter}
                     onFilterChange={setFilter}
                 />
-                <TodoBody/>
+                <TodoBody filter={filter}/>
             </div>
         </DarkModeProvider>
     );

@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
 import {IoAddSharp} from "react-icons/io5";
-import {MdDeleteOutline} from "react-icons/md";
+import TodoItem from "./TodoItem";
 
-function TodoBody(props) {
+export default function TodoBody({filter}) {
     /* 유저 입력 상태 관리 */
     const [input, setInput] = useState('');
 
@@ -29,23 +29,35 @@ function TodoBody(props) {
         setTodoMenu(filterItem);
     }
 
+    const filtered = getFilteredItems(todoMenu, filter);
+
     return (
         <section>
             {/* 리스트 */}
-            {todoMenu.map((item, idx) => (
-                <div key={idx} className="todoList">
-                    <input id={item.name} value={item.name} type="checkbox"/>
-                    <label htmlFor={item.name}>{item.name}</label>
-                    <button type="button" onClick={() => handleRemoveList(item.id)}><MdDeleteOutline/></button>
-                </div>
-            ))}
+            <ul>
+                {filtered.map((value, idx) => (
+                    <TodoItem
+                        key={idx}
+                        value={value}
+                        handleRemoveList={handleRemoveList}
+                    />
+                ))}
+            </ul>
             {/* 메뉴 추가 */}
             <div className="todoMenu">
                 <input value={input} onChange={handleInput}/>
-                <button onClick={handleCreateList}><IoAddSharp/></button>
+                <button onClick={handleCreateList}>
+                    <IoAddSharp/>
+                </button>
             </div>
         </section>
     );
 }
 
-export default TodoBody;
+function getFilteredItems(todoMenu, filter) {
+    if (filter === "전체") {
+        return todoMenu;
+    }
+
+    return todoMenu.filter(todoMenu => todoMenu.state === filter);
+}
