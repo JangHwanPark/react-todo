@@ -7,7 +7,7 @@ export default function TodoBody({filter}) {
     const [input, setInput] = useState('');
 
     /* 입력한 데이터(상태) 관리 */
-    const [todoMenu, setTodoMenu] = useState([]);
+    const [todoData, setTodoData] = useState([]);
 
     /* 유저 입력 받는 함수 */
     const handleInput = (e) => setInput(e.target.value);
@@ -18,18 +18,22 @@ export default function TodoBody({filter}) {
     /* 할일 추가 핸들러 */
     const handleCreateList = () => {
         const newMenu = { id: count.current, name: input, state: '전체' };
-        setTodoMenu([...todoMenu, newMenu]);
+        setTodoData([...todoData, newMenu]);
         setInput('');
         count.current += 1;
     }
 
-    /* 버튼 클릭시 할일 제거 */
-    const handleRemoveList = (item) => {
-        const filterItem = todoMenu.filter(data => item !== data.id);
-        setTodoMenu(filterItem);
+    const handleUpdateList = (updated) => {
+        setTodoData(todoData.map((data) => data.id === updated.id ? updated : data));
     }
 
-    const filtered = getFilteredItems(todoMenu, filter);
+    /* 버튼 클릭시 할일 제거 */
+    const handleRemoveList = (item) => {
+        const filterItem = todoData.filter(data => item !== data.id);
+        setTodoData(filterItem);
+    }
+
+    const filtered = getFilteredItems(todoData, filter);
 
     return (
         <section>
@@ -40,6 +44,7 @@ export default function TodoBody({filter}) {
                         key={idx}
                         value={value}
                         handleRemoveList={handleRemoveList}
+                        handleUpdateList={handleUpdateList}
                     />
                 ))}
             </ul>
