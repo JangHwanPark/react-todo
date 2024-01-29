@@ -1,11 +1,16 @@
 import React from 'react';
 import {MdOutlineLightMode, MdOutlineNightlight} from "react-icons/md";
+import {useDarkMode} from "../context/DarkModeContext";
 
 export default function TodoHeader({filters, filter, onFilterChange}) {
+    const {darkMode, toggleDarkMode} = useDarkMode();
+
     return (
         <header className='filter'>
-            <div><MdOutlineLightMode/></div>
-            <div><MdOutlineNightlight/></div>
+            <button onClick={toggleDarkMode}>
+                {!darkMode && <MdOutlineLightMode/>}
+                {darkMode && <MdOutlineNightlight/>}
+            </button>
             <ul>
                 {filters.map((value, idx) => (
                     <li key={idx}>
