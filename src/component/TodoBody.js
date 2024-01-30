@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {IoAddSharp} from "react-icons/io5";
 import TodoItem from "./TodoItem";
 
@@ -7,7 +7,7 @@ export default function TodoBody({filter}) {
     const [input, setInput] = useState('');
 
     /* 입력한 데이터(상태) 관리 */
-    const [todoData, setTodoData] = useState([]);
+    const [todoData, setTodoData] = useState(() => readTodoData());
 
     /* 유저 입력 받는 함수 */
     const handleInput = (e) => setInput(e.target.value);
@@ -35,6 +35,12 @@ export default function TodoBody({filter}) {
 
     const filtered = getFilteredItems(todoData, filter);
 
+    /* 로컬 스토리지에서 데이터 받아오는 훅 */
+    useEffect(() => {
+        /* 로컬 스토리지 내 값 저장 */
+        localStorage.setItem('todo', JSON.stringify(todoData))
+    }, [todoData])
+
     return (
         <section>
             {/* 리스트 */}
@@ -59,10 +65,13 @@ export default function TodoBody({filter}) {
     );
 }
 
-function getFilteredItems(todoMenu, filter) {
-    if (filter === "전체") {
-        return todoMenu;
-    }
+function readTodoData() {
+    console.log('State Load Test')
+    const todos = localStorage.getItem('todo');
+    return todos ? JSON.parse(todos) : [];
+}
 
+function getFilteredItems(todoMenu, filter) {
+    if (filter === "전체") return todoMenu;
     return todoMenu.filter(todoMenu => todoMenu.state === filter);
 }
