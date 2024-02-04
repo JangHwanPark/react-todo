@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState} from "react";
 import TodoBody from "./component/TodoBody";
-import TodoHeader from "./component/TodoHeader";
+import TodoHeader from "./component/Header/TodoHeader";
 import {DarkModeProvider} from "./context/DarkModeContext";
 
 const filters = ['전체', '계획된 일정', '완료됨'];

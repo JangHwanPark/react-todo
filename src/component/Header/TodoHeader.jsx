@@ -1,20 +1,24 @@
 import React from 'react';
+import styles from './Header.module.css'
 import {MdOutlineLightMode, MdOutlineNightlight} from "react-icons/md";
-import {useDarkMode} from "../context/DarkModeContext";
+import {useDarkMode} from "../../context/DarkModeContext";
 
 export default function TodoHeader({filters, filter, onFilterChange}) {
     const {darkMode, toggleDarkMode} = useDarkMode();
 
     return (
-        <header className='filter'>
+        <header className={styles.header}>
             <button onClick={toggleDarkMode}>
                 {!darkMode && <MdOutlineLightMode/>}
                 {darkMode && <MdOutlineNightlight/>}
             </button>
-            <ul>
+            <ul className={styles.filters}>
                 {filters.map((value, idx) => (
                     <li key={idx}>
-                        <button onClick={() => onFilterChange(value)}>
+                        <button
+                            className={styles.filter}
+                            onClick={() => onFilterChange(value)}
+                        >
                             {value}
                         </button>
                     </li>
