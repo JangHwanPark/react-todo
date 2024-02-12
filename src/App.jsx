@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useState} from "react";
-import TodoBody from "./component/TodoBody";
+import TodoBody from "./component/TodoBody/TodoBody";
 import TodoHeader from "./component/Header/TodoHeader";
 import {DarkModeProvider} from "./context/DarkModeContext";
 

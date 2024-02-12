@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './TodoItem.module.css';
 import {MdDeleteOutline} from "react-icons/md";
 
 function TodoItem({value, idx, handleRemoveList, handleUpdateList}) {
@@ -9,16 +10,19 @@ function TodoItem({value, idx, handleRemoveList, handleUpdateList}) {
     }
 
     return (
-        <li key={idx}>
+        <li key={idx} className={styles.todo}>
             <input
+                className={styles.checkbox}
                 id={name}
                 value={name}
                 type="checkbox"
                 checked={state === '완료됨'}
                 onChange={handleChange}
             />
-            <label htmlFor={name}>{name}</label>
-            <button type="button" onClick={() => handleRemoveList(id)}>
+            <label htmlFor={name} className={styles.text}>
+                {name}
+            </label>
+            <button type="button" onClick={() => handleRemoveList(id)} className={styles.button}>
                 <MdDeleteOutline/>
             </button>
         </li>

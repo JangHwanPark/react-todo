@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
+import styles from './TodoBody.module.css';
 import {IoAddSharp} from "react-icons/io5";
-import TodoItem from "./TodoItem";
+import TodoItem from "../TodoItem/TodoItem";
 
 export default function TodoBody({filter}) {
     /* 유저 입력 상태 관리 */
@@ -42,9 +43,9 @@ export default function TodoBody({filter}) {
     }, [todoData])
 
     return (
-        <section>
+        <section className={styles.container}>
             {/* 리스트 */}
-            <ul>
+            <ul className={styles.list}>
                 {filtered.map((value, idx) => (
                     <TodoItem
                         key={idx}
@@ -55,9 +56,13 @@ export default function TodoBody({filter}) {
                 ))}
             </ul>
             {/* 메뉴 추가 */}
-            <div className="todoMenu">
-                <input value={input} onChange={handleInput}/>
-                <button onClick={handleCreateList}>
+            <div className={styles.form}>
+                <input
+                    className={styles.input}
+                    value={input}
+                    onChange={handleInput}
+                />
+                <button onClick={handleCreateList} className={styles.button}>
                     <IoAddSharp/>
                 </button>
             </div>
